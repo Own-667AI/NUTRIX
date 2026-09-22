@@ -6,9 +6,9 @@ export default function Login() {
     <div className="login">
       <div className="login__card">
         <div className="login__brand">
-          <img 
-            src="/images/Logos/svg/nutrix-logo-transparent-pour-fond-sombre.svg" 
-            alt="NUTRIX Logo" 
+          <img
+            src="/images/Logos/svg/nutrix-logo-transparent-pour-fond-sombre.svg"
+            alt="NUTRIX Logo"
             className="login__logo-img"
           />
         </div>
