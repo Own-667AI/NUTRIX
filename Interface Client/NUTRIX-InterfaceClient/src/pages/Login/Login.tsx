@@ -6,13 +6,13 @@ export default function Login() {
     <div className="login">
       <div className="login__card">
         <div className="login__brand">
-          <img 
-            src="/images/Logos/svg/nutrix-logo-transparent-pour-fond-sombre.svg" 
-            alt="NUTRIX Logo" 
+          <img
+            src="/images/Logos/svg/nutrix-logo-transparent-pour-fond-sombre.svg"
+            alt="NUTRIX Logo"
             className="login__logo-img"
           />
         </div>
-        <p className="login__subtitle">Système autonome de planification alimentaire</p>
+        <p className="login__subtitle">Systèmeeeeeeeeeeee autonome de planification alimentaire</p>
 
         <form className="login__form" onSubmit={(e) => e.preventDefault()}>
           <div className="login__field">
