@@ -12,7 +12,7 @@ export default function Login() {
             className="login__logo-img"
           />
         </div>
-        <p className="login__subtitle">Systèmeeeeeeeeeeee autonome de planification alimentaire</p>
+        <p className="login__subtitle">Système autonome de planification alimentaire</p>
 
         <form className="login__form" onSubmit={(e) => e.preventDefault()}>
           <div className="login__field">
