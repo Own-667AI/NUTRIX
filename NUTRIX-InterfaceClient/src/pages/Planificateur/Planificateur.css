@@ -1,0 +1,149 @@
+/* ==========================================================================
+   PAGE PLANIFICATEUR (NUTRIX DA Naturel & Épuré)
+   ========================================================================== */
+
+.planificateur-page {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* En-tête de la page */
+.planificateur-page__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--evergreen-border);
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.planificateur-page__title {
+    font-family: var(--font-title);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--evergreen);
+    margin: 0 0 6px;
+    letter-spacing: 1px;
+}
+
+.planificateur-page__subtitle {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+/* Barre d'outils et de filtres */
+.planificateur-page__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: rgba(8, 28, 21, 0.4);
+    border: 1px solid var(--evergreen-border);
+    border-radius: 12px;
+    padding: 14px 18px;
+}
+
+.toolbar__search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--evergreen-surface);
+    border: 1px solid var(--evergreen-border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    flex: 1;
+    min-width: 240px;
+    max-width: 400px;
+}
+
+.toolbar__search input {
+    background: transparent;
+    border: none;
+    color: var(--frosted-mint);
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+}
+
+.toolbar__search input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.toolbar__filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    font-family: var(--font-subtitle);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 14px;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--color-text-muted);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    color: var(--frosted-mint);
+    background: rgba(116, 198, 157, 0.08);
+}
+
+.filter-btn--active {
+    background: rgba(64, 145, 108, 0.25);
+    color: var(--frosted-mint);
+    border-color: var(--sea-green);
+    font-weight: 600;
+}
+
+/* Select du filtre allergènes, même hauteur/rythme que les filter-btn */
+.toolbar__filters select {
+    font-family: var(--font-subtitle);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 14px;
+    border-radius: 6px;
+    background: var(--evergreen-surface);
+    color: var(--frosted-mint);
+    border: 1px solid var(--evergreen-border);
+    cursor: pointer;
+    outline: none;
+}
+
+.toolbar__filters select:hover,
+.toolbar__filters select:focus {
+    border-color: var(--sea-green);
+}
+
+/* Grille des MealCards */
+.planificateur-page__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+}
+
+/* Message si aucun résultat */
+.planificateur-page__empty {
+    background: var(--evergreen-surface);
+    border: 1px dashed var(--evergreen-border);
+    border-radius: 12px;
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}

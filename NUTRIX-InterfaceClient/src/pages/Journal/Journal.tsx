@@ -21,13 +21,9 @@ const OCCUPANTS = [
   { id: 6, nom: 'Antoine Garcia' },
 ];
 
-// Types de repas
-const TYPES_REPAS = ['Petit-déjeuner', 'Déjeuner', 'Dîner', 'Collation'];
-
 interface JournalEntry {
   id: number;
   occupant: string;
-  typeRepas: string;
   menu: string;
   date: string;
   notes: string;
@@ -38,7 +34,6 @@ const INITIAL_ENTRIES: JournalEntry[] = [
   {
     id: 1,
     occupant: 'Claire Dubois',
-    typeRepas: 'Déjeuner',
     menu: 'Menu A — Poulet grillé, riz complet, épinards',
     date: '2026-09-23 12:30',
     notes: 'Portion complète, bon appétit.',
@@ -46,7 +41,6 @@ const INITIAL_ENTRIES: JournalEntry[] = [
   {
     id: 2,
     occupant: 'Thomas Moreau',
-    typeRepas: 'Petit-déjeuner',
     menu: 'Menu F — Riz au lait, fruits secs, compote',
     date: '2026-09-23 07:15',
     notes: '',
@@ -54,7 +48,6 @@ const INITIAL_ENTRIES: JournalEntry[] = [
   {
     id: 3,
     occupant: 'Élodie Bertrand',
-    typeRepas: 'Dîner',
     menu: 'Menu E — Soupe de légumes, pain complet, fromage',
     date: '2026-09-22 19:45',
     notes: 'A demandé une portion réduite.',
@@ -81,7 +74,6 @@ export default function Journal() {
     const newEntry: JournalEntry = {
       id: Date.now(),
       occupant: selectedOccupant,
-      typeRepas: selectedTypeRepas,
       menu: selectedMenu,
       date: selectedDate.replace('T', ' '),
       notes: notes,
@@ -143,25 +135,6 @@ export default function Journal() {
                 ))}
               </select>
             </div>
-
-            <div className="journal-form__group">
-              <label className="journal-form__label" htmlFor="journal-type-repas">
-                Type de repas
-              </label>
-              <select
-                id="journal-type-repas"
-                className="journal-form__select"
-                value={selectedTypeRepas}
-                onChange={(e) => setSelectedTypeRepas(e.target.value)}
-              >
-                <option value="">Sélectionner le type</option>
-                {TYPES_REPAS.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
 
           <div className="journal-form__group">
@@ -217,7 +190,6 @@ export default function Journal() {
               {entries.map((entry) => (
                 <div className="journal-entry" key={entry.id}>
                   <div className="journal-entry__header">
-                    <span className="journal-entry__meal">{entry.typeRepas}</span>
                     <span className="journal-entry__date">{entry.date}</span>
                   </div>
                   <span className="journal-entry__menu">{entry.menu}</span>
