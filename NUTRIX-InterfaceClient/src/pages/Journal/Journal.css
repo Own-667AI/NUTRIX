@@ -1,0 +1,286 @@
+/* ==========================================================================
+   PAGE JOURNAL ALIMENTAIRE (NUTRIX DA Naturel & Épuré)
+   ========================================================================== */
+
+.journal-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* En-tête */
+.journal-page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--evergreen-border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.journal-page__title {
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--evergreen);
+  margin: 0 0 6px;
+  letter-spacing: 1px;
+}
+
+.journal-page__subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Layout deux colonnes : formulaire + historique */
+.journal-page__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .journal-page__content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   FORMULAIRE DE SAISIE
+   -------------------------------------------------------------------------- */
+.journal-form {
+  background: var(--evergreen-surface);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.journal-form__title {
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--frosted-mint);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.journal-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.journal-form__label {
+  font-family: var(--font-subtitle);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--frosted-mint);
+  letter-spacing: 0.3px;
+}
+
+.journal-form__hint {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.journal-form__input,
+.journal-form__select,
+.journal-form__textarea {
+  background: rgba(8, 28, 21, 0.45);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--frosted-mint);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.journal-form__input:focus,
+.journal-form__select:focus,
+.journal-form__textarea:focus {
+  border-color: var(--sea-green);
+}
+
+.journal-form__input::placeholder,
+.journal-form__textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.journal-form__select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238db89a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.journal-form__select option {
+  background: #0e261d;
+  color: var(--frosted-mint);
+}
+
+.journal-form__textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.journal-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 550px) {
+  .journal-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.journal-form__submit {
+  font-family: var(--font-subtitle);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 11px 20px;
+  border-radius: 8px;
+  background: var(--sea-green);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(64, 145, 108, 0.3);
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.journal-form__submit:hover {
+  background: var(--sea-green-hover);
+  transform: translateY(-1px);
+}
+
+.journal-form__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Message de succès */
+.journal-form__success {
+  background: rgba(116, 198, 157, 0.12);
+  border: 1px solid rgba(116, 198, 157, 0.25);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--mint-leaf);
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   HISTORIQUE DES ENTRÉES
+   -------------------------------------------------------------------------- */
+.journal-history {
+  background: var(--evergreen-surface);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.journal-history__title {
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--frosted-mint);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.journal-history__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.journal-entry {
+  background: rgba(8, 28, 21, 0.45);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.journal-entry:hover {
+  border-color: var(--mint-leaf-border);
+}
+
+.journal-entry__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.journal-entry__meal {
+  font-family: var(--font-subtitle);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--frosted-mint);
+}
+
+.journal-entry__date {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.journal-entry__menu {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--mint-leaf);
+  font-weight: 500;
+}
+
+.journal-entry__occupant {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.journal-entry__notes {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.journal-history__empty {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 24px 0;
+}

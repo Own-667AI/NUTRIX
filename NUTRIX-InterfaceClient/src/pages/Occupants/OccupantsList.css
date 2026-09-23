@@ -1,0 +1,212 @@
+/* ==========================================================================
+   PAGE OCCUPANTS (NUTRIX DA Naturel & Épuré)
+   ========================================================================== */
+
+.occupants-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* En-tête de la page */
+.occupants-page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--evergreen-border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.occupants-page__title {
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--evergreen);
+  margin: 0 0 6px;
+  letter-spacing: 1px;
+}
+
+.occupants-page__subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* KPIs de Synthèse */
+.occupants-page__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .occupants-page__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  .occupants-page__stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  background: var(--evergreen-surface);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.stat-card__icon {
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(116, 198, 157, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mint-leaf);
+}
+
+.stat-card__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card__value {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--frosted-mint);
+  line-height: 1.1;
+}
+
+.stat-card__label {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* Barre d'outils et de filtres */
+.occupants-page__toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: rgba(8, 28, 21, 0.4);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+
+.toolbar__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--evergreen-surface);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  flex: 1;
+  min-width: 240px;
+  max-width: 400px;
+}
+
+.toolbar__search input {
+  background: transparent;
+  border: none;
+  color: var(--frosted-mint);
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+}
+
+.toolbar__search input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.toolbar__filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-btn {
+  font-family: var(--font-subtitle);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  color: var(--frosted-mint);
+  background: rgba(116, 198, 157, 0.08);
+}
+
+.filter-btn--active {
+  background: rgba(64, 145, 108, 0.25);
+  color: var(--frosted-mint);
+  border-color: var(--sea-green);
+  font-weight: 600;
+}
+
+.btn-add-occupant {
+  font-family: var(--font-subtitle);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 8px;
+  background: var(--sea-green);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(64, 145, 108, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-add-occupant:hover {
+  background: var(--sea-green-hover);
+  transform: translateY(-1px);
+}
+
+/* Grille des Occupants */
+.occupants-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+/* State message if empty */
+.occupants-page__empty {
+  background: var(--evergreen-surface);
+  border: 1px dashed var(--evergreen-border);
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}

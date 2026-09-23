@@ -1,0 +1,370 @@
+/* ==========================================================================
+   OCCUPANT CARD — COMPOSANT RÉUTILISABLE (NUTRIX DA Naturel & Épuré)
+   ========================================================================== */
+
+.occupant-card {
+  background: var(--evergreen-surface);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 16px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.occupant-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--sea-green) 0%, var(--mint-leaf) 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.occupant-card:hover {
+  border-color: var(--mint-leaf-border);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), 0 0 20px rgba(116, 198, 157, 0.08);
+}
+
+.occupant-card:hover::before {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   1. En-tête : Avatar & Identité
+   -------------------------------------------------------------------------- */
+.occupant-card__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.occupant-card__avatar-wrapper {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.occupant-card__avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--sea-green);
+}
+
+.occupant-card__avatar-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--evergreen) 0%, rgba(116, 198, 157, 0.15) 100%);
+  border: 2px solid var(--mint-leaf-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--frosted-mint);
+  letter-spacing: 1px;
+}
+
+.occupant-card__gender-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  border: 2px solid var(--evergreen-surface);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.gender--male {
+  background: #2a6f97;
+  color: #e0f2fe;
+}
+
+.gender--female {
+  background: #9d4edd;
+  color: #fae8ff;
+}
+
+.gender--other {
+  background: #38b000;
+  color: #f0fdf4;
+}
+
+.occupant-card__identity {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.occupant-card__name-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.occupant-card__fullname {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.occupant-card__prenom {
+  font-family: var(--font-subtitle);
+  font-weight: 600;
+  color: var(--frosted-mint);
+  text-transform: capitalize;
+}
+
+.occupant-card__nom {
+  font-family: var(--font-title);
+  font-weight: 700;
+  color: var(--mint-leaf);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.occupant-card__role {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Statut Pill */
+.occupant-card__status-pill {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.status-dot {
+  font-size: 9px;
+}
+
+.status--optimal {
+  background: rgba(116, 198, 157, 0.12);
+  color: var(--mint-leaf);
+  border: 1px solid rgba(116, 198, 157, 0.25);
+}
+
+.status--warning {
+  background: rgba(233, 196, 106, 0.12);
+  color: var(--color-alert-warning);
+  border: 1px solid rgba(233, 196, 106, 0.25);
+}
+
+.status--danger {
+  background: rgba(231, 111, 81, 0.12);
+  color: var(--color-alert-danger);
+  border: 1px solid rgba(231, 111, 81, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   2. Grille des Métriques (Sexe, Âge, Poids)
+   -------------------------------------------------------------------------- */
+.occupant-card__metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: rgba(8, 28, 21, 0.45);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.metric-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric-box__icon {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.metric-box__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-box__label {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.3px;
+}
+
+.metric-box__value {
+  font-family: var(--font-subtitle);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--frosted-mint);
+}
+
+/* --------------------------------------------------------------------------
+   3. Section Apports Énergétiques Kcal
+   -------------------------------------------------------------------------- */
+.occupant-card__kcal-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(116, 198, 157, 0.04);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.kcal-section__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kcal-section__title {
+  font-family: var(--font-subtitle);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--frosted-mint);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kcal-icon {
+  color: var(--color-alert-warning);
+}
+
+.kcal-section__count {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.kcal-section__count strong {
+  color: var(--mint-leaf);
+  font-size: 14px;
+}
+
+.kcal-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.kcal-progress__track {
+  height: 8px;
+  width: 100%;
+  background: rgba(116, 198, 157, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.kcal-progress__bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--sea-green) 0%, var(--mint-leaf) 100%);
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.kcal-progress__meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-ui);
+  font-size: 11px;
+}
+
+.kcal-progress__percent {
+  color: var(--mint-leaf);
+  font-weight: 600;
+}
+
+.kcal-progress__target {
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   4. Pied de Card : Actions
+   -------------------------------------------------------------------------- */
+.occupant-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.occupant-card__btn {
+  font-family: var(--font-subtitle);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.occupant-card__btn--primary {
+  flex: 1;
+  background: rgba(64, 145, 108, 0.2);
+  color: var(--frosted-mint);
+  border: 1px solid var(--sea-green);
+}
+
+.occupant-card__btn--primary:hover {
+  background: var(--sea-green);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(64, 145, 108, 0.3);
+}
+
+.occupant-card__btn--secondary {
+  background: rgba(116, 198, 157, 0.08);
+  color: var(--mint-leaf);
+  border: 1px solid var(--evergreen-border);
+  padding: 9px 12px;
+}
+
+.occupant-card__btn--secondary:hover {
+  background: rgba(116, 198, 157, 0.2);
+  color: var(--frosted-mint);
+}

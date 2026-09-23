@@ -1,0 +1,298 @@
+/* ==========================================================================
+   PAGE STOCK (NUTRIX DA Naturel & Épuré)
+   ========================================================================== */
+
+.stock-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* En-tête de la page */
+.stock-page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--evergreen-border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.stock-page__title {
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--evergreen);
+  margin: 0 0 6px;
+  letter-spacing: 1px;
+}
+
+.stock-page__subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* KPIs de synthèse */
+.stock-page__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .stock-page__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  .stock-page__stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Barre d'outils */
+.stock-page__toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: rgba(8, 28, 21, 0.4);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+
+/* Grille des cartes catégories */
+.stock-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   STOCK CATEGORY CARD
+   -------------------------------------------------------------------------- */
+.stock-category-card {
+  background: var(--evergreen-surface);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 16px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.stock-category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--sea-green) 0%, var(--mint-leaf) 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.stock-category-card:hover {
+  border-color: var(--mint-leaf-border);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), 0 0 20px rgba(116, 198, 157, 0.08);
+}
+
+.stock-category-card:hover::before {
+  opacity: 1;
+}
+
+/* Header catégorie */
+.stock-category-card__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stock-category-card__icon {
+  font-size: 22px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(116, 198, 157, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mint-leaf);
+  flex-shrink: 0;
+}
+
+.stock-category-card__identity {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.stock-category-card__name {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--frosted-mint);
+  letter-spacing: 0.5px;
+}
+
+.stock-category-card__count {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+/* Liste d'ingrédients */
+.stock-category-card__items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(8, 28, 21, 0.45);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.stock-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.stock-item__name {
+  font-family: var(--font-subtitle);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--frosted-mint);
+}
+
+.stock-item__details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stock-item__qty {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mint-leaf);
+}
+
+.stock-item__status {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.stock-item__status--ok {
+  background: rgba(116, 198, 157, 0.12);
+  color: var(--mint-leaf);
+  border: 1px solid rgba(116, 198, 157, 0.25);
+}
+
+.stock-item__status--low {
+  background: rgba(233, 196, 106, 0.12);
+  color: var(--color-alert-warning);
+  border: 1px solid rgba(233, 196, 106, 0.25);
+}
+
+.stock-item__status--critical {
+  background: rgba(231, 111, 81, 0.12);
+  color: var(--color-alert-danger);
+  border: 1px solid rgba(231, 111, 81, 0.25);
+}
+
+/* Jauge de stock global de la catégorie */
+.stock-category-card__gauge {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(116, 198, 157, 0.04);
+  border: 1px solid var(--evergreen-border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.stock-gauge__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stock-gauge__title {
+  font-family: var(--font-subtitle);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--frosted-mint);
+}
+
+.stock-gauge__value {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.stock-gauge__value strong {
+  color: var(--mint-leaf);
+  font-size: 14px;
+}
+
+.stock-gauge__track {
+  height: 8px;
+  width: 100%;
+  background: rgba(116, 198, 157, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.stock-gauge__bar {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s ease;
+}
+
+.stock-gauge__bar--ok {
+  background: linear-gradient(90deg, var(--sea-green) 0%, var(--mint-leaf) 100%);
+}
+
+.stock-gauge__bar--low {
+  background: linear-gradient(90deg, #c9a227 0%, var(--color-alert-warning) 100%);
+}
+
+.stock-gauge__bar--critical {
+  background: linear-gradient(90deg, #c44536 0%, var(--color-alert-danger) 100%);
+}
+
+/* State empty */
+.stock-page__empty {
+  background: var(--evergreen-surface);
+  border: 1px dashed var(--evergreen-border);
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
