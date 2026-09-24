@@ -57,7 +57,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Panneau graphique + tableau prévisionnel
+   Panneau graphique + détail du plan de production
    -------------------------------------------------------------------------- */
 .forecast-panel {
     background: var(--evergreen-surface);
@@ -115,66 +115,130 @@
     padding: 12px 8px 4px;
 }
 
-/* Tableau prévisionnel */
-.forecast-panel__table-wrapper {
-    overflow-x: auto;
+/* --------------------------------------------------------------------------
+   Détail par aliment (mêmes classes que le panneau "besoins" d'Agriculture)
+   -------------------------------------------------------------------------- */
+.besoins-panel__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.previsionnel-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: var(--font-ui);
-    font-size: 13px;
+.besoin-row {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr auto;
+    align-items: center;
+    gap: 18px;
+    background: rgba(8, 28, 21, 0.45);
+    border: 1px solid var(--evergreen-border);
+    border-radius: 10px;
+    padding: 12px 16px;
 }
 
-.previsionnel-table th {
-    text-align: left;
+@media (max-width: 800px) {
+    .besoin-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+.besoin-row__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.besoin-row__nom {
+    font-family: var(--font-subtitle);
+    font-size: 14px;
     font-weight: 600;
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 0.3px;
-    color: var(--color-text-muted);
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--evergreen-border);
-    white-space: nowrap;
-}
-
-.previsionnel-table td {
-    padding: 10px 12px;
     color: var(--frosted-mint);
-    border-bottom: 1px solid var(--evergreen-border);
-    white-space: nowrap;
 }
 
-.previsionnel-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.previsionnel-table tbody tr:hover td {
-    background: rgba(116, 198, 157, 0.05);
-}
-
-.previsionnel-table__delta {
-    font-weight: 600;
-    padding: 3px 9px;
-    border-radius: 999px;
+.besoin-row__detail {
+    font-family: var(--font-ui);
     font-size: 12px;
+    color: var(--color-text-muted);
 }
 
-.previsionnel-table__delta--positive {
+.besoin-row__gauge {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.besoin-gauge__track {
+    height: 8px;
+    width: 100%;
+    background: rgba(116, 198, 157, 0.1);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.besoin-gauge__bar {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.6s ease;
+}
+
+.besoin-gauge__bar--faible {
+    background: linear-gradient(90deg, var(--sea-green) 0%, var(--mint-leaf) 100%);
+}
+
+.besoin-gauge__bar--moyenne {
+    background: linear-gradient(90deg, #c9a227 0%, var(--color-alert-warning) 100%);
+}
+
+.besoin-gauge__bar--urgente {
+    background: linear-gradient(90deg, #c44536 0%, var(--color-alert-danger) 100%);
+}
+
+.besoin-row__percent {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: var(--color-text-muted);
+}
+
+.besoin-row__badge {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    justify-self: end;
+}
+
+@media (max-width: 800px) {
+    .besoin-row__badge {
+        justify-self: start;
+    }
+}
+
+.besoin-row__badge--faible {
     background: rgba(116, 198, 157, 0.12);
     color: var(--mint-leaf);
     border: 1px solid rgba(116, 198, 157, 0.25);
 }
 
-.previsionnel-table__delta--negative {
+.besoin-row__badge--moyenne {
+    background: rgba(233, 196, 106, 0.12);
+    color: var(--color-alert-warning);
+    border: 1px solid rgba(233, 196, 106, 0.25);
+}
+
+.besoin-row__badge--urgente {
     background: rgba(231, 111, 81, 0.12);
     color: var(--color-alert-danger);
     border: 1px solid rgba(231, 111, 81, 0.25);
 }
 
 /* --------------------------------------------------------------------------
-   Classements de consommation (aliments / menus)
+   Classements : aliments les plus consommés / menus les plus servis
    -------------------------------------------------------------------------- */
 .previsionnel-page__rankings {
     display: grid;
