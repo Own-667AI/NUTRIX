@@ -254,7 +254,7 @@ export default function Previsionnel() {
                   fontSize: 13,
                 }}
                 labelStyle={{ color: '#D8F3DC' }}
-                formatter={(value: number) => [`${value} kg`, 'Consommé']}
+                formatter={(value) => [`${value} kg`, 'Consommé']}
               />
               <Bar dataKey="qteKg" fill={COLOR_MINT_LEAF} radius={[0, 4, 4, 0]} barSize={16} />
             </BarChart>
@@ -291,7 +291,7 @@ export default function Previsionnel() {
                   fontSize: 13,
                 }}
                 labelStyle={{ color: '#D8F3DC' }}
-                formatter={(value: number) => [`${value} fois`, 'Servi']}
+                formatter={(value) => [`${value} fois`, 'Servi']}
               />
               <Bar dataKey="fois" fill={COLOR_SEA_GREEN} radius={[0, 4, 4, 0]} barSize={16} />
             </BarChart>
