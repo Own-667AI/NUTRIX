@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import type { FormEvent } from 'react';
 import './Login.css';
 
 export default function Login() {
-
   const [identifiant, setIdentifiant] = useState('');
   const [password, setPassword] = useState('');
 
-  async function handleLogin(e) {
+  async function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     try {
@@ -23,6 +23,7 @@ export default function Login() {
         alert('Erreur : ' + (data.message || data.error || response.status));
         return;
       }
+
       localStorage.setItem('token', data.token);
       alert('Connexion réussie');
     } catch (err) {
