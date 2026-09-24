@@ -5,7 +5,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   Bar,
   Line,
   BarChart,
@@ -23,7 +22,6 @@ import {
 const COLOR_SEA_GREEN = '#40916C';
 const COLOR_MINT_LEAF = '#74C69D';
 const COLOR_WARNING = '#E9C46A';
-const COLOR_DANGER = '#E76F51';
 const COLOR_GRID = 'rgba(216, 243, 220, 0.1)';
 const COLOR_AXIS = 'rgba(216, 243, 220, 0.55)';
 
@@ -209,8 +207,8 @@ export default function Previsionnel() {
                   <td>
                     <span
                       className={`previsionnel-table__delta ${semaine.solde >= 0
-                          ? 'previsionnel-table__delta--positive'
-                          : 'previsionnel-table__delta--negative'
+                        ? 'previsionnel-table__delta--positive'
+                        : 'previsionnel-table__delta--negative'
                         }`}
                     >
                       {semaine.solde >= 0 ? '+' : ''}
