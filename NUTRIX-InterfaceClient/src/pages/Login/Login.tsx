@@ -1,7 +1,35 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import './Login.css';
 
 export default function Login() {
+
+  const [identifiant, setIdentifiant] = useState('');
+  const [password, setPassword] = useState('');
+
+  async function handleLogin(e) {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(import.meta.env.VITE_NUTRIX_API + '/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: identifiant, password }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        alert('Erreur : ' + (data.message || data.error || response.status));
+        return;
+      }
+      localStorage.setItem('token', data.token);
+      alert('Connexion réussie');
+    } catch (err) {
+      alert('Impossible de joindre le serveur');
+      console.error(err);
+    }
+  }
   return (
     <div className="login">
       <div className="login__card">
@@ -14,18 +42,18 @@ export default function Login() {
         </div>
         <p className="login__subtitle">Système autonome de planification alimentaire</p>
 
-        <form className="login__form" onSubmit={(e) => e.preventDefault()}>
+        <form className="login__form" onSubmit={handleLogin}>
           <div className="login__field">
             <label htmlFor="login-username">Identifiant</label>
-            <input id="login-username" type="text" placeholder="Votre identifiant" autoComplete="username" />
+            <input id="login-username" type="text" placeholder="Votre identifiant" autoComplete="username" value={identifiant} onChange={(e) => setIdentifiant(e.target.value)} />
           </div>
           <div className="login__field">
             <label htmlFor="login-password">Mot de passe</label>
-            <input id="login-password" type="password" placeholder="••••••••" autoComplete="current-password" />
+            <input id="login-password" type="password" placeholder="••••••••" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
-          <Link to="/dashboard" className="login__btn" id="login-submit">
+          <button type="submit" className="login__btn" id="login-submit">
             Accéder au système
-          </Link>
+          </button>
           <Link to="/register" className="login__register_btn" id="login-register_btn">
             Créer un compte
           </Link>
