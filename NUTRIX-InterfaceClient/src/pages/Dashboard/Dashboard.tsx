@@ -9,6 +9,9 @@ interface MacroGaugeProps {
 }
 
 function LinearGaugeCard({ title, current, target, unit }: MacroGaugeProps) {
+
+
+
   const percentage = Math.min(100, Math.round((current / target) * 100));
 
   return (

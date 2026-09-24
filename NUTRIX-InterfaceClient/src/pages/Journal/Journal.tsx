@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Journal.css';
+
+const API_URL = import.meta.env.VITE_NUTRIX_API;
 
 // Menus disponibles dans la station NUTRIX
 const MENUS_DISPONIBLES = [
@@ -21,9 +23,15 @@ const OCCUPANTS = [
   { id: 6, nom: 'Antoine Garcia' },
 ];
 
+interface TypeRepas {
+  id: number;
+  label: string;
+}
+
 interface JournalEntry {
   id: number;
   occupant: string;
+  typeRepas: string;
   menu: string;
   date: string;
   notes: string;
@@ -34,6 +42,7 @@ const INITIAL_ENTRIES: JournalEntry[] = [
   {
     id: 1,
     occupant: 'Claire Dubois',
+    typeRepas: 'Déjeuner',
     menu: 'Menu A — Poulet grillé, riz complet, épinards',
     date: '2026-09-23 12:30',
     notes: 'Portion complète, bon appétit.',
@@ -41,6 +50,7 @@ const INITIAL_ENTRIES: JournalEntry[] = [
   {
     id: 2,
     occupant: 'Thomas Moreau',
+    typeRepas: 'Petit-déjeuner',
     menu: 'Menu F — Riz au lait, fruits secs, compote',
     date: '2026-09-23 07:15',
     notes: '',
@@ -48,6 +58,7 @@ const INITIAL_ENTRIES: JournalEntry[] = [
   {
     id: 3,
     occupant: 'Élodie Bertrand',
+    typeRepas: 'Dîner',
     menu: 'Menu E — Soupe de légumes, pain complet, fromage',
     date: '2026-09-22 19:45',
     notes: 'A demandé une portion réduite.',
@@ -57,6 +68,41 @@ const INITIAL_ENTRIES: JournalEntry[] = [
 export default function Journal() {
   const [entries, setEntries] = useState<JournalEntry[]>(INITIAL_ENTRIES);
   const [showSuccess, setShowSuccess] = useState(false);
+
+  // Types de repas récupérés depuis l'API
+  const [typesRepas, setTypesRepas] = useState<TypeRepas[]>([]);
+  const [typesRepasLoading, setTypesRepasLoading] = useState(true);
+  const [typesRepasError, setTypesRepasError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchTypesRepas() {
+      try {
+        const response = await fetch(`${API_URL}/types-repas`);
+        if (!response.ok) {
+          throw new Error(`Erreur serveur (${response.status})`);
+        }
+        const data: TypeRepas[] = await response.json();
+        if (!cancelled) {
+          setTypesRepas(data);
+        }
+      } catch {
+        if (!cancelled) {
+          setTypesRepasError('Impossible de charger les types de repas.');
+        }
+      } finally {
+        if (!cancelled) {
+          setTypesRepasLoading(false);
+        }
+      }
+    }
+
+    fetchTypesRepas();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Form state
   const [selectedOccupant, setSelectedOccupant] = useState('');
@@ -74,6 +120,7 @@ export default function Journal() {
     const newEntry: JournalEntry = {
       id: Date.now(),
       occupant: selectedOccupant,
+      typeRepas: selectedTypeRepas,
       menu: selectedMenu,
       date: selectedDate.replace('T', ' '),
       notes: notes,
@@ -135,6 +182,31 @@ export default function Journal() {
                 ))}
               </select>
             </div>
+
+            <div className="journal-form__group">
+              <label className="journal-form__label" htmlFor="journal-type-repas">
+                Type de repas
+              </label>
+              <select
+                id="journal-type-repas"
+                className="journal-form__select"
+                value={selectedTypeRepas}
+                onChange={(e) => setSelectedTypeRepas(e.target.value)}
+                disabled={typesRepasLoading}
+              >
+                <option value="">
+                  {typesRepasLoading ? 'Chargement...' : 'Sélectionner un type de repas'}
+                </option>
+                {typesRepas.map((type) => (
+                  <option key={type.id} value={type.label}>
+                    {type.label}
+                  </option>
+                ))}
+              </select>
+              {typesRepasError && (
+                <span className="journal-form__hint">{typesRepasError}</span>
+              )}
+            </div>
           </div>
 
           <div className="journal-form__group">
@@ -190,6 +262,7 @@ export default function Journal() {
               {entries.map((entry) => (
                 <div className="journal-entry" key={entry.id}>
                   <div className="journal-entry__header">
+                    <span className="journal-entry__meal">{entry.typeRepas}</span>
                     <span className="journal-entry__date">{entry.date}</span>
                   </div>
                   <span className="journal-entry__menu">{entry.menu}</span>
